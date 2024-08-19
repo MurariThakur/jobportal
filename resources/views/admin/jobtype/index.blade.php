@@ -1,0 +1,47 @@
+@extends('admin.layouts.appp')
+
+@section('content')
+    <div class="container">
+        <h2>Job Type</h2>
+        <a href="{{ route('admin.jobtype.create') }}" class="btn btn-primary mb-3">Create Job Type</a>
+        
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($jobtypes as $jobtype)
+                    <tr>
+                        <td>{{ $jobtype->name }}</td>
+                        <td>
+                            <span class="badge {{ $jobtype->status == 1 ? 'bg-success' : 'bg-primary' }}">
+                                {{ $jobtype->status == 1 ? 'Active' : 'Inactive' }}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="{{ route('admin.jobtype.show', $jobtype->id) }}" class="btn btn-info btn-sm">View</a>
+                            <a href="{{ route('admin.jobtype.edit', $jobtype->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                            <form action="{{ route('admin.jobtype.destroy', $jobtype->id) }}" method="POST" style="display: inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        
+        <div class="mt-3 d-flex justify-content-end">
+            {{ $jobtypes->links() }}
+        </div>
+    </div>
+@endsection
