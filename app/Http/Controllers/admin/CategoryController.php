@@ -26,7 +26,7 @@ class CategoryController extends Controller
        ]);
 
        if($validator->fails()){
-        return response()->json(['errors','errors'=>$validator->errors()],422);
+        return response()->json(['errors'=>$validator->errors()],422);
        }
 
        if($validator->passes()){
@@ -52,7 +52,7 @@ class CategoryController extends Controller
         ]);
  
         if($validator->fails()){
-         return response()->json(['errors','errors'=>$validator->errors()],422);
+         return response()->json(['errors'=>$validator->errors()],422);
         }
  
         if($validator->passes()){
@@ -74,7 +74,7 @@ class CategoryController extends Controller
     public function destroy($id){
         $category = category::find($id);
         $category->delete();
-        session()->flash('success','Category deletedc successfully');
+        session()->flash('success','Category deleted successfully');
         return redirect()->back();
     }
 }

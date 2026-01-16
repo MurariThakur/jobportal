@@ -30,7 +30,7 @@
     </script>
 @endif
 
-@if ($errors->any())
+@if (session('error'))
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="exclamation-circle-fill" viewBox="0 0 16 16">
             <path
@@ -38,6 +38,28 @@
         </symbol>
     </svg>
     <div id="error-alert" class="alert alert-danger d-flex align-items-center alert-dismissible fade show"
+        role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" fill="currentColor" role="img"
+            aria-label="Error:">
+            <use xlink:href="#exclamation-circle-fill"></use>
+        </svg>
+
+        <div>
+            {{ session('error') }}
+        </div>
+
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if ($errors->any())
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="exclamation-circle-fill" viewBox="0 0 16 16">
+            <path
+                d="M16 8a8 8 0 1 1-16 0 8 8 0 0 1 16 0zM8 4a.5.5 0 0 0-.5.5V8a.5.5 0 0 0 1 0V4.5A.5.5 0 0 0 8 4zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+        </symbol>
+    </svg>
+    <div id="validation-alert" class="alert alert-danger d-flex align-items-center alert-dismissible fade show"
         role="alert">
         <svg class="bi flex-shrink-0 me-2" width="24" height="24" fill="currentColor" role="img"
             aria-label="Error:">
@@ -61,13 +83,19 @@
         let successAlert = document.getElementById('success-alert');
         if (successAlert) {
             let bootstrapSuccessAlert = new bootstrap.Alert(successAlert);
-            bootstrapSuccessAlert.close(); // Dismiss the success alert programmatically
+            bootstrapSuccessAlert.close();
         }
 
         let errorAlert = document.getElementById('error-alert');
         if (errorAlert) {
             let bootstrapErrorAlert = new bootstrap.Alert(errorAlert);
-            bootstrapErrorAlert.close(); // Dismiss the error alert programmatically
+            bootstrapErrorAlert.close();
         }
-    }, 3000); // 3 seconds delay
+
+        let validationAlert = document.getElementById('validation-alert');
+        if (validationAlert) {
+            let bootstrapValidationAlert = new bootstrap.Alert(validationAlert);
+            bootstrapValidationAlert.close();
+        }
+    }, 3000);
 </script>

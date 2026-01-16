@@ -51,6 +51,7 @@ Route::prefix('admin')->group(function(){
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('users', [DashboardController::class, 'user'])->name('admin.user');
+        Route::put('users/role/{id}', [DashboardController::class, 'updateRole'])->name('admin.user.role');
         Route::post('/logout', [DashboardController::class,'logout']);
 
         //category

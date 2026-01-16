@@ -40,7 +40,7 @@ class AdminJobController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json(['errors','errors'=>$validator->errors()],422);
+            return response()->json(['errors'=>$validator->errors()],422);
         }
         $user = Auth::user()->id;
         if($validator->passes()){
@@ -64,7 +64,7 @@ class AdminJobController extends Controller
             $jobtype->company_website = $request->company_website;
 
             $jobtype ->save();
-            session()->flash('success','job created successfully');
+            session()->flash('success','Job created successfully');
             return response()->json(['redirect_url'=>route('admin.job.list')]);
         }
     }
@@ -72,7 +72,7 @@ class AdminJobController extends Controller
     public function edit($id){
         $categories =category::where('status',1)->get();
         $jobtypes =jobType::where('status',1)->get();
-        $jobs = createJob::find($id);;        
+        $jobs = createJob::find($id);        
         return view('admin.job.edit',compact('jobs','categories','jobtypes'));
     }
 
@@ -89,7 +89,7 @@ class AdminJobController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json(['errors','errors'=>$validator->errors()],422);
+            return response()->json(['errors'=>$validator->errors()],422);
         }
         $user = Auth::user()->id;
         if($validator->passes()){
@@ -108,19 +108,19 @@ class AdminJobController extends Controller
             $jobtype->qualifications = $request->qualifications;
             $jobtype->keywords = $request->keywords;
             $jobtype->experience = $request->experience;
-            $jobtype->status = $request->status;
-            $jobtype->isFeature = $request->isFeatured;
+            $jobtype->status = $request->status ?? 1;
+            $jobtype->isFeature = $request->isFeatured ?? 0;
             $jobtype->company_name = $request->company_name;
             $jobtype->company_location = $request->company_location;
             $jobtype->company_website = $request->company_website;
             $jobtype ->save();
-            session()->flash('success','job updated successfully');
+            session()->flash('success','Job updated successfully');
             return response()->json(['redirect_url'=>route('admin.job.list')]);
         }
     }
 
     public function show($id){
-        $jobs = createJob::find($id);;        
+        $jobs = createJob::find($id);        
         return view('admin.job.show',compact('jobs'));
     }
 

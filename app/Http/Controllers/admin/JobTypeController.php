@@ -35,7 +35,7 @@ class JobTypeController extends Controller
         $jobtype->name = $request->name;
         $jobtype->status = $request->status;
         $jobtype->save();
-        session()->flash('success','jobtype created successfully');
+        session()->flash('success','Job Type created successfully');
         return redirect()->route('admin.jobtype');
        }
     }
@@ -74,7 +74,7 @@ class JobTypeController extends Controller
     public function destroy($id){
         $jobtype = jobType::find($id);
         $jobtype->delete();
-        session()->flash('success','Job Type deletedc successfully');
+        session()->flash('success','Job Type deleted successfully');
         return redirect()->back();
     }
 }

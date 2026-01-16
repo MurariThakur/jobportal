@@ -18,6 +18,7 @@
                     <th>Mobile</th>
                     <th>Role</th>
                     <th>Designation</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,16 +28,17 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->mobile }}</td>
                         <td>{{ $user->role }}</td>
-                        <td>{{ $user->Designation }}</td>
-                        {{-- <td>
-                            <a href="{{ route('categories.show', $category) }}" class="btn btn-info btn-sm">View</a>
-                            <a href="{{ route('categories.edit', $category) }}" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display: inline-block;">
+                        <td>{{ $user->designation }}</td>
+                        <td>
+                            <form action="{{ route('admin.user.role', $user->id) }}" method="POST">
                                 @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                                @method('PUT')
+                                <select name="role" class="form-select form-select-sm d-inline-block w-auto" onchange="this.form.submit()">
+                                    <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
+                                    <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                                </select>
                             </form>
-                        </td> --}}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

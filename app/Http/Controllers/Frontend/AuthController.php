@@ -30,7 +30,6 @@ class AuthController extends Controller
 
         if(Auth::attempt($credentials)){
             $request->session()->flash('success', 'You have successfully logged in.');
-            $request->session()->flash('success',' Login Successfully');
             return response()->json(['redirect_url' => route('frontend.home')]);
         }
         else{

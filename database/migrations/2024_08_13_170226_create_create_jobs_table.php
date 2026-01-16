@@ -29,8 +29,8 @@ return new class extends Migration
             $table->string('company_name');
             $table->string('company_location')->nullable();
             $table->string('company_website')->nullable();
-            $table->string('status')->default(1);
-            $table->string('isFeature')->default(0);
+            $table->integer('status')->default(1);
+            $table->integer('isFeature')->default(0);
             $table->timestamps();
         });
     }

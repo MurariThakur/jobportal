@@ -16,10 +16,14 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && Auth::user()->role =='admin'){
-            return $next($request);
+        if(!Auth::check()){
+            return redirect('/admin/login');
         }
-        return redirect('/admin/login')->with('error', 'Access denied.');
-       
+        
+        if(Auth::user()->role != 'admin'){
+            return redirect('/')->with('error', 'Access denied. Admin privileges required.');
+        }
+        
+        return $next($request);
     }
 }

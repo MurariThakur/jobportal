@@ -9,7 +9,7 @@
             <div class="col">
                 <nav aria-label="breadcrumb" class=" rounded-3 p-3 mb-4">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">Home</a></li>
                         <li class="breadcrumb-item active">My Jobs</li>
                     </ol>
                 </nav>
@@ -26,7 +26,7 @@
                                 <h3 class="fs-4 mb-1">My Jobs</h3>
                             </div>
                             <div style="margin-top: -10px;">
-                                <a href="post-job.html" class="btn btn-primary">Post a Job</a>
+                                <a href="{{ route('frontend.jobpost') }}" class="btn btn-primary">Post a Job</a>
                             </div>
                             
                         </div>
@@ -49,7 +49,7 @@
                                             <div class="info1">{{ $job->jobType->name }} . {{ $job->location }}</div>
                                         </td>
                                         <td>{{ $job->created_at->format('d M Y') }}</td>
-                                        <td>130 Applications</td>
+                                        <td>{{ $job->applications->count() }} Applications</td>
                                         <td>
                                             <div class="job-status text-capitalize">{{ $job->status == 1 ? 'Active' : 'Inactive' }}</div>
                                         </td>

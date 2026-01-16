@@ -80,7 +80,7 @@
                         <div class="descript_wrap white-bg">
                             <div class="single_wrap">
                                 <h4>Job description</h4>
-                                <li>{!! nl2br($jobs->description) !!}</li>
+                                <p>{!! nl2br($jobs->description) !!}</p>
                             </div>
                             @if ($jobs->responsibility)
                                 <div class="single_wrap">
@@ -162,10 +162,10 @@
                                 <ul>
                                     <li>Name: <span>{{ $jobs->company_name }}</span></li>
                                     @if ($jobs->company_location)
-                                        <li>Locaion: <span>{{ $jobs->company_location }}</span></li>
+                                        <li>Location: <span>{{ $jobs->company_location }}</span></li>
                                     @endif
                                     @if ($jobs->company_website)
-                                        <li>Webite: <span><a
+                                        <li>Website: <span><a
                                                     href="{{ $jobs->company_website }}">{{ $jobs->company_website }}</a></span>
                                         </li>
                                     @endif

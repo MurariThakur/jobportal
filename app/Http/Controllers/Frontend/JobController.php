@@ -35,7 +35,7 @@ class JobController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json(['errors','errors'=>$validator->errors()],422);
+            return response()->json(['errors'=>$validator->errors()],422);
         }
         $user = Auth::user()->id;
         if($validator->passes()){
@@ -59,14 +59,14 @@ class JobController extends Controller
             $jobtype->company_website = $request->company_website;
 
             $jobtype ->save();
-            session()->flash('success','job created successfully');
+            session()->flash('success','Job created successfully');
             return response()->json(['redirect_url'=>route('frontend.myjobs')]);
         }
     }
 
     public function myjobs(){
         $user = Auth::user();
-        $jobs = createJob::where('status',1)->where('user_id',$user->id)->with('jobType')->paginate(10);
+        $jobs = createJob::where('status',1)->where('user_id',$user->id)->with('jobType')->withCount('applications')->paginate(10);
         return view('frontend.jobs.myjobs',compact('user','jobs'));
     }
 
@@ -74,7 +74,7 @@ class JobController extends Controller
         $user = Auth::user();
         $categories =category::where('status',1)->get();
         $jobtypes =jobType::where('status',1)->get();
-        $jobs = createJob::find($id);;
+        $jobs = createJob::find($id);
         if(!$jobs || $jobs->user_id != $user->id){
             abort(404);
         }
@@ -95,7 +95,7 @@ class JobController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json(['errors','errors'=>$validator->errors()],422);
+            return response()->json(['errors'=>$validator->errors()],422);
         }
         $user = Auth::user()->id;
         if($validator->passes()){
@@ -118,7 +118,7 @@ class JobController extends Controller
             $jobtype->company_location = $request->company_location;
             $jobtype->company_website = $request->company_website;
             $jobtype ->save();
-            session()->flash('success','job updated successfully');
+            session()->flash('success','Job updated successfully');
             return response()->json(['redirect_url'=>route('frontend.myjobs')]);
         }
     }
@@ -138,8 +138,7 @@ class JobController extends Controller
 
     public function jobApplied(){
         $user = Auth::user();
-        $jobApplied = jobApplication::where('user_id',$user->id)->with('job')->get();
-        // dd($jobApplied);
+        $jobApplied = jobApplication::where('user_id',$user->id)->with(['job.jobType', 'job.applications'])->get();
         return view('frontend.jobs.jobApplied',compact('user','jobApplied'));
     }
 
@@ -159,8 +158,7 @@ class JobController extends Controller
 
     public function jobSaved(){
         $user = Auth::user();
-        $jobSaved = SavedJob::where('user_id',$user->id)->with('job')->get();
-        // dd($jobSaved);
+        $jobSaved = SavedJob::where('user_id',$user->id)->with(['job.jobType', 'job.applications'])->get();
         return view('frontend.jobs.jobSaved',compact('user','jobSaved'));
     }
 

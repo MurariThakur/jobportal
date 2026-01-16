@@ -9,8 +9,8 @@
             <div class="col">
                 <nav aria-label="breadcrumb" class=" rounded-3 p-3 mb-4">
                     <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">My Jobs</li>
+                        <li class="breadcrumb-item"><a href="{{ route('frontend.home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Saved Jobs</li>
                     </ol>
                 </nav>
             </div>
@@ -46,7 +46,7 @@
                                             <div class="info1">{{ $jobsave->job->jobType->name }} . {{ $jobsave->job->location }}</div>
                                         </td>
                                         <td>{{ $jobsave->created_at->format('d M Y') }}</td>
-                                        <td>{{ $jobsave->job->SavedJob->count() }} Applications</td>
+                                        <td>{{ $jobsave->job->applications->count() }} Applications</td>
                                         <td>
                                             <div class="job-status text-capitalize">{{ $jobsave->job->status == 1 ? 'Active' : 'Inactive' }}</div>
                                         </td>

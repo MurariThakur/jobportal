@@ -21,7 +21,7 @@ class ProfileController extends Controller
         $user = Auth::user()->id;
         $validator = Validator::make($request->all(),[
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,'.$user.'id',
+            'email' => 'required|email|unique:users,email,'.$user.',id',
             'designation' =>'required',
             'mobile' => 'required',
         ]);
@@ -73,10 +73,6 @@ class ProfileController extends Controller
     }
 
     public function updatepic(Request $request){
-        // if ($request->hasFile('image')) {
-        //     dd($request->file('image'));
-        // }
-        dd($request->all());
         $validator = Validator::make($request->all(), [
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [

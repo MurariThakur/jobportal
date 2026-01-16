@@ -142,7 +142,7 @@ class FindJobController extends Controller
         //     'job' => $job
         // ];
         // Mail::to($employer->email)->send(new JobNotificationEmail($mailData));
-        session()->flash('success','job applies successfully');
+        session()->flash('success','Job applied successfully');
 
         return redirect()->back();
 
@@ -187,7 +187,7 @@ class FindJobController extends Controller
         //     'job' => $job
         // ];
         // Mail::to($employer->email)->send(new JobNotificationEmail($mailData));
-        session()->flash('success','job applies successfully');
+        session()->flash('success','Job saved successfully');
 
         return redirect()->back();
 

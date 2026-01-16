@@ -9,7 +9,7 @@
         </div>
     @endif
     {{-- Banner --}}
-    <section class="section-0 lazy d-flex bg-image-style dark align-items-center " class=""
+    <section class="section-0 lazy d-flex bg-image-style dark align-items-center"
         data-bg="assets/images/banner5.jpg">
         <div class="container">
             <div class="row">
@@ -69,7 +69,7 @@
                         <a href="{{ route('frontend.job').'?category='.$category->id }}">
                             <h4 class="pb-2">{{ $category->name }}</h4>
                         </a>
-                        <p class="mb-0"> <span>50</span> Available position</p>
+                        <p class="mb-0"> <span>{{ $category->jobs_count }}</span> Available position</p>
                     </div>
                 </div>
                 @endforeach
@@ -92,7 +92,7 @@
                                 <div class="card border-0 p-3 shadow mb-4">
                                     <div class="card-body">
                                         <h3 class="border-0 fs-5 pb-2 mb-0">{{ $featurejob->title }}</h3>
-                                        <p>{{ Str::words($featurejob->description, 5) }}</p>
+                                        <p>{{ Str::words(strip_tags($featurejob->description), 5) }}</p>
                                         <div class="bg-light p-3 border">
                                             <p class="mb-0">
                                                 <span class="fw-bolder"><i class="fa fa-map-marker"></i></span>
@@ -140,7 +140,7 @@
                                 <div class="card border-0 p-3 shadow mb-4">
                                     <div class="card-body">
                                         <h3 class="border-0 fs-5 pb-2 mb-0">{{ $latestjob->title }}</h3>
-                                        <p>{{ Str::words($latestjob->description, 5) }}</p>
+                                        <p>{{ Str::words(strip_tags($latestjob->description), 5) }}</p>
                                         <div class="bg-light p-3 border">
                                             <p class="mb-0">
                                                 <span class="fw-bolder"><i class="fa fa-map-marker"></i></span>

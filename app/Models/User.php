@@ -43,6 +43,6 @@ class User extends Authenticatable
     ];
 
     public function createjob(){
-        return $this->hasOne(createJob::class);
+        return $this->hasMany(createJob::class);
     }
 }
